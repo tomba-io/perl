@@ -1,0 +1,24 @@
+---
+abstract: 'Perl extension for Tomba Email Finder tomba.io'
+author:
+  - 'Mohamed Ben rebia <b.mohamed@tomba.io>'
+build_requires:
+  ExtUtils::MakeMaker: '0'
+configure_requires:
+  ExtUtils::MakeMaker: '0'
+dynamic_config: 0
+generated_by: 'ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010'
+license: apache
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: Tomba-Finder
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  JSON: '0'
+  LWP::UserAgent: '0'
+version: '1.0'
+x_serialization_backend: 'CPAN::Meta::YAML version 0.018'
