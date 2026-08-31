@@ -1,7 +1,7 @@
 # This Makefile is for the Tomba::Finder extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 7.24 (Revision: 72400) from the contents of
+# 7.62 (Revision: 76200) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -16,10 +16,12 @@
 #     BUILD_REQUIRES => {  }
 #     CONFIGURE_REQUIRES => {  }
 #     LICENSE => q[apache_2_0]
+#     META_MERGE => { meta-spec=>{ version=>q[2] }, resources=>{ bugtracker=>{ web=>q[https://github.com/tomba-io/perl/issues] }, homepage=>q[https://tomba.io], repository=>{ type=>q[git], url=>q[https://github.com/tomba-io/perl.git], web=>q[https://github.com/tomba-io/perl] } } }
+#     MIN_PERL_VERSION => q[5.026001]
 #     NAME => q[Tomba::Finder]
-#     PREREQ_PM => { JSON=>q[0], LWP::UserAgent=>q[0] }
-#     TEST_REQUIRES => {  }
-#     VERSION_FROM => q[lib/Tomba/Finder.pm]
+#     PREREQ_PM => { HTTP::Headers=>q[0], HTTP::Request=>q[0], JSON=>q[0], LWP::UserAgent=>q[0], Test::More=>q[0.98], URI=>q[0], URI::Escape=>q[0], parent=>q[0] }
+#     TEST_REQUIRES => { Test::More=>q[0.98] }
+#     VERSION_FROM => q[lib/Tomba/Client.pm]
 #     clean => { FILES=>q[Tomba-Finder-*] }
 #     dist => { COMPRESS=>q[gzip -9f], SUFFIX=>q[gz] }
 
@@ -28,7 +30,7 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /usr/lib/x86_64-linux-gnu/perl/5.26/Config.pm).
+# These definitions are from config.sh (via /usr/lib/x86_64-linux-gnu/perl-base/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
 CC = x86_64-linux-gnu-gcc
@@ -41,16 +43,16 @@ FULL_AR = /usr/bin/ar
 LD = x86_64-linux-gnu-gcc
 LDDLFLAGS = -shared -L/usr/local/lib -fstack-protector-strong
 LDFLAGS =  -fstack-protector-strong -L/usr/local/lib
-LIBC = libc-2.27.so
+LIBC = /lib/x86_64-linux-gnu/libc.so.6
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = linux
-OSVERS = 4.9.0
+OSVERS = 4.19.0
 RANLIB = :
-SITELIBEXP = /usr/local/share/perl/5.26.1
-SITEARCHEXP = /usr/local/lib/x86_64-linux-gnu/perl/5.26.1
+SITELIBEXP = /usr/local/share/perl/5.34.0
+SITEARCHEXP = /usr/local/lib/x86_64-linux-gnu/perl/5.34.0
 SO = so
-VENDORARCHEXP = /usr/lib/x86_64-linux-gnu/perl5/5.26
+VENDORARCHEXP = /usr/lib/x86_64-linux-gnu/perl5/5.34
 VENDORLIBEXP = /usr/share/perl5
 
 
@@ -60,11 +62,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Tomba::Finder
 NAME_SYM = Tomba_Finder
-VERSION = 1.0
+VERSION = 1.1.0
 VERSION_MACRO = VERSION
-VERSION_SYM = 1_0
+VERSION_SYM = 1_1_0
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 1.0
+XS_VERSION = 1.1.0
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -75,23 +77,25 @@ INST_MAN1DIR = blib/man1
 INST_MAN3DIR = blib/man3
 MAN1EXT = 1p
 MAN3EXT = 3pm
+MAN1SECTION = 1
+MAN3SECTION = 3
 INSTALLDIRS = site
 DESTDIR = 
 PREFIX = $(SITEPREFIX)
 PERLPREFIX = /usr
 SITEPREFIX = /usr/local
 VENDORPREFIX = /usr
-INSTALLPRIVLIB = /usr/share/perl/5.26
+INSTALLPRIVLIB = /usr/share/perl/5.34
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = /usr/local/share/perl/5.26.1
+INSTALLSITELIB = /usr/local/share/perl/5.34.0
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
 INSTALLVENDORLIB = /usr/share/perl5
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.26
+INSTALLARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.34
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /usr/local/lib/x86_64-linux-gnu/perl/5.26.1
+INSTALLSITEARCH = /usr/local/lib/x86_64-linux-gnu/perl/5.34.0
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
-INSTALLVENDORARCH = /usr/lib/x86_64-linux-gnu/perl5/5.26
+INSTALLVENDORARCH = /usr/lib/x86_64-linux-gnu/perl5/5.34
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
 INSTALLBIN = /usr/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
@@ -117,16 +121,16 @@ INSTALLSITEMAN3DIR = /usr/local/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
 INSTALLVENDORMAN3DIR = /usr/share/man/man3
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
-PERL_LIB = /usr/share/perl/5.26
-PERL_ARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.26
-PERL_ARCHLIBDEP = /usr/lib/x86_64-linux-gnu/perl/5.26
+PERL_LIB = /usr/share/perl/5.34
+PERL_ARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.34
+PERL_ARCHLIBDEP = /usr/lib/x86_64-linux-gnu/perl/5.34
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /usr/lib/x86_64-linux-gnu/perl/5.26/CORE
-PERL_INCDEP = /usr/lib/x86_64-linux-gnu/perl/5.26/CORE
+PERL_INC = /usr/lib/x86_64-linux-gnu/perl/5.34/CORE
+PERL_INCDEP = /usr/lib/x86_64-linux-gnu/perl/5.34/CORE
 PERL = "/usr/bin/perl"
 FULLPERL = "/usr/bin/perl"
 ABSPERL = $(PERL)
@@ -141,9 +145,9 @@ PERM_DIR = 755
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /usr/share/perl/5.26/ExtUtils/MakeMaker.pm
-MM_VERSION  = 7.24
-MM_REVISION = 72400
+MAKEMAKER   = /usr/share/perl/5.34/ExtUtils/MakeMaker.pm
+MM_VERSION  = 7.62
+MM_REVISION = 76200
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
@@ -154,7 +158,7 @@ FULLEXT = Tomba/Finder
 BASEEXT = Finder
 PARENT_NAME = Tomba
 DLBASE = $(BASEEXT)
-VERSION_FROM = lib/Tomba/Finder.pm
+VERSION_FROM = lib/Tomba/Client.pm
 OBJECT = 
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
@@ -166,7 +170,29 @@ C_FILES  =
 O_FILES  = 
 H_FILES  = 
 MAN1PODS = 
-MAN3PODS = lib/Tomba/Finder.pm
+MAN3PODS = lib/Tomba/Account.pm \
+	lib/Tomba/Bulk.pm \
+	lib/Tomba/Client.pm \
+	lib/Tomba/Count.pm \
+	lib/Tomba/Domain.pm \
+	lib/Tomba/Enrichment.pm \
+	lib/Tomba/Finder.pm \
+	lib/Tomba/Flag.pm \
+	lib/Tomba/Format.pm \
+	lib/Tomba/Keys.pm \
+	lib/Tomba/Leads.pm \
+	lib/Tomba/LeadsAttributes.pm \
+	lib/Tomba/LeadsList.pm \
+	lib/Tomba/Location.pm \
+	lib/Tomba/Logs.pm \
+	lib/Tomba/Phone.pm \
+	lib/Tomba/Reveal.pm \
+	lib/Tomba/Similar.pm \
+	lib/Tomba/Sources.pm \
+	lib/Tomba/Status.pm \
+	lib/Tomba/Technology.pm \
+	lib/Tomba/Usage.pm \
+	lib/Tomba/Verifier.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIBDEP)$(DFSEP)Config.pm $(PERL_INCDEP)$(DFSEP)config.h
@@ -189,12 +215,33 @@ PERL_ARCHIVEDEP    =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/Tomba/Finder.pm \
-	test.pm
+TO_INST_PM = lib/Tomba/Account.pm \
+	lib/Tomba/Bulk.pm \
+	lib/Tomba/Client.pm \
+	lib/Tomba/Count.pm \
+	lib/Tomba/Domain.pm \
+	lib/Tomba/Enrichment.pm \
+	lib/Tomba/Finder.pm \
+	lib/Tomba/Flag.pm \
+	lib/Tomba/Format.pm \
+	lib/Tomba/Keys.pm \
+	lib/Tomba/Leads.pm \
+	lib/Tomba/LeadsAttributes.pm \
+	lib/Tomba/LeadsList.pm \
+	lib/Tomba/Location.pm \
+	lib/Tomba/Logs.pm \
+	lib/Tomba/Phone.pm \
+	lib/Tomba/Reveal.pm \
+	lib/Tomba/Similar.pm \
+	lib/Tomba/Sources.pm \
+	lib/Tomba/Status.pm \
+	lib/Tomba/Technology.pm \
+	lib/Tomba/Usage.pm \
+	lib/Tomba/Verifier.pm
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 7.24
+MM_Unix_VERSION = 7.62
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
@@ -260,7 +307,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Tomba-Finder
-DISTVNAME = Tomba-Finder-1.0
+DISTVNAME = Tomba-Finder-1.1.0
 
 
 # --- MakeMaker macro section:
@@ -312,8 +359,6 @@ all :: pure_all manifypods
 	$(NOECHO) $(NOOP)
 
 pure_all :: config pm_to_blib subdirs linkext
-	$(NOECHO) $(NOOP)
-
 	$(NOECHO) $(NOOP)
 
 subdirs :: $(MYEXTLIB)
@@ -417,9 +462,53 @@ POD2MAN = $(POD2MAN_EXE)
 
 
 manifypods : pure_all config  \
-	lib/Tomba/Finder.pm
+	lib/Tomba/Account.pm \
+	lib/Tomba/Bulk.pm \
+	lib/Tomba/Client.pm \
+	lib/Tomba/Count.pm \
+	lib/Tomba/Domain.pm \
+	lib/Tomba/Enrichment.pm \
+	lib/Tomba/Finder.pm \
+	lib/Tomba/Flag.pm \
+	lib/Tomba/Format.pm \
+	lib/Tomba/Keys.pm \
+	lib/Tomba/Leads.pm \
+	lib/Tomba/LeadsAttributes.pm \
+	lib/Tomba/LeadsList.pm \
+	lib/Tomba/Location.pm \
+	lib/Tomba/Logs.pm \
+	lib/Tomba/Phone.pm \
+	lib/Tomba/Reveal.pm \
+	lib/Tomba/Similar.pm \
+	lib/Tomba/Sources.pm \
+	lib/Tomba/Status.pm \
+	lib/Tomba/Technology.pm \
+	lib/Tomba/Usage.pm \
+	lib/Tomba/Verifier.pm
 	$(NOECHO) $(POD2MAN) --section=$(MAN3EXT) --perm_rw=$(PERM_RW) -u \
-	  lib/Tomba/Finder.pm $(INST_MAN3DIR)/Tomba::Finder.$(MAN3EXT) 
+	  lib/Tomba/Account.pm $(INST_MAN3DIR)/Tomba::Account.$(MAN3EXT) \
+	  lib/Tomba/Bulk.pm $(INST_MAN3DIR)/Tomba::Bulk.$(MAN3EXT) \
+	  lib/Tomba/Client.pm $(INST_MAN3DIR)/Tomba::Client.$(MAN3EXT) \
+	  lib/Tomba/Count.pm $(INST_MAN3DIR)/Tomba::Count.$(MAN3EXT) \
+	  lib/Tomba/Domain.pm $(INST_MAN3DIR)/Tomba::Domain.$(MAN3EXT) \
+	  lib/Tomba/Enrichment.pm $(INST_MAN3DIR)/Tomba::Enrichment.$(MAN3EXT) \
+	  lib/Tomba/Finder.pm $(INST_MAN3DIR)/Tomba::Finder.$(MAN3EXT) \
+	  lib/Tomba/Flag.pm $(INST_MAN3DIR)/Tomba::Flag.$(MAN3EXT) \
+	  lib/Tomba/Format.pm $(INST_MAN3DIR)/Tomba::Format.$(MAN3EXT) \
+	  lib/Tomba/Keys.pm $(INST_MAN3DIR)/Tomba::Keys.$(MAN3EXT) \
+	  lib/Tomba/Leads.pm $(INST_MAN3DIR)/Tomba::Leads.$(MAN3EXT) \
+	  lib/Tomba/LeadsAttributes.pm $(INST_MAN3DIR)/Tomba::LeadsAttributes.$(MAN3EXT) \
+	  lib/Tomba/LeadsList.pm $(INST_MAN3DIR)/Tomba::LeadsList.$(MAN3EXT) \
+	  lib/Tomba/Location.pm $(INST_MAN3DIR)/Tomba::Location.$(MAN3EXT) \
+	  lib/Tomba/Logs.pm $(INST_MAN3DIR)/Tomba::Logs.$(MAN3EXT) \
+	  lib/Tomba/Phone.pm $(INST_MAN3DIR)/Tomba::Phone.$(MAN3EXT) \
+	  lib/Tomba/Reveal.pm $(INST_MAN3DIR)/Tomba::Reveal.$(MAN3EXT) \
+	  lib/Tomba/Similar.pm $(INST_MAN3DIR)/Tomba::Similar.$(MAN3EXT) \
+	  lib/Tomba/Sources.pm $(INST_MAN3DIR)/Tomba::Sources.$(MAN3EXT) \
+	  lib/Tomba/Status.pm $(INST_MAN3DIR)/Tomba::Status.$(MAN3EXT) \
+	  lib/Tomba/Technology.pm $(INST_MAN3DIR)/Tomba::Technology.$(MAN3EXT) \
+	  lib/Tomba/Usage.pm $(INST_MAN3DIR)/Tomba::Usage.$(MAN3EXT) \
+	  lib/Tomba/Verifier.pm $(INST_MAN3DIR)/Tomba::Verifier.$(MAN3EXT) 
 
 
 
@@ -487,15 +576,16 @@ realclean purge :: realclean_subdirs
 metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '---' > META_new.yml
-	$(NOECHO) $(ECHO) 'abstract: '\''Perl extension for Tomba Email Finder tomba.io'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'abstract: '\''Perl client library for the Tomba.io Email Finder API'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  - '\''Mohamed Ben rebia <b.mohamed@tomba.io>'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'build_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  Test::More: '\''0.98'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'configure_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''0'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'dynamic_config: 1' >> META_new.yml
-	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 7.62, CPAN::Meta::Converter version 2.150010'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license: apache' >> META_new.yml
 	$(NOECHO) $(ECHO) 'meta-spec:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  url: http://module-build.sourceforge.net/META-spec-v1.4.html' >> META_new.yml
@@ -506,25 +596,35 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '    - t' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
+	$(NOECHO) $(ECHO) '  HTTP::Headers: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  HTTP::Request: '\''0'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) '  JSON: '\''0'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) '  LWP::UserAgent: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: '\''1.0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  URI: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  URI::Escape: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  parent: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  perl: '\''5.026001'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'resources:' >> META_new.yml
+	$(NOECHO) $(ECHO) '  bugtracker: https://github.com/tomba-io/perl/issues' >> META_new.yml
+	$(NOECHO) $(ECHO) '  homepage: https://tomba.io' >> META_new.yml
+	$(NOECHO) $(ECHO) '  repository: https://github.com/tomba-io/perl.git' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: v1.1.0' >> META_new.yml
 	$(NOECHO) $(ECHO) 'x_serialization_backend: '\''CPAN::Meta::YAML version 0.018'\''' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
-	$(NOECHO) $(ECHO) '   "abstract" : "Perl extension for Tomba Email Finder tomba.io",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "abstract" : "Perl client library for the Tomba.io Email Finder API",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "author" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '      "Mohamed Ben rebia <b.mohamed@tomba.io>"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
 	$(NOECHO) $(ECHO) '   "dynamic_config" : 1,' >> META_new.json
-	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 7.62, CPAN::Meta::Converter version 2.150010",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "license" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '      "apache_2_0"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
 	$(NOECHO) $(ECHO) '   "meta-spec" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",' >> META_new.json
-	$(NOECHO) $(ECHO) '      "version" : "2"' >> META_new.json
+	$(NOECHO) $(ECHO) '      "version" : 2' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "name" : "Tomba-Finder",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "no_index" : {' >> META_new.json
@@ -546,14 +646,36 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      },' >> META_new.json
 	$(NOECHO) $(ECHO) '      "runtime" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '            "HTTP::Headers" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '            "HTTP::Request" : "0",' >> META_new.json
 	$(NOECHO) $(ECHO) '            "JSON" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "LWP::UserAgent" : "0"' >> META_new.json
+	$(NOECHO) $(ECHO) '            "LWP::UserAgent" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '            "URI" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '            "URI::Escape" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '            "parent" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '            "perl" : "5.026001"' >> META_new.json
+	$(NOECHO) $(ECHO) '         }' >> META_new.json
+	$(NOECHO) $(ECHO) '      },' >> META_new.json
+	$(NOECHO) $(ECHO) '      "test" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '            "Test::More" : "0.98"' >> META_new.json
 	$(NOECHO) $(ECHO) '         }' >> META_new.json
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "1.0",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 2.27400_02"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "resources" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '      "bugtracker" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '         "web" : "https://github.com/tomba-io/perl/issues"' >> META_new.json
+	$(NOECHO) $(ECHO) '      },' >> META_new.json
+	$(NOECHO) $(ECHO) '      "homepage" : "https://tomba.io",' >> META_new.json
+	$(NOECHO) $(ECHO) '      "repository" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '         "type" : "git",' >> META_new.json
+	$(NOECHO) $(ECHO) '         "url" : "https://github.com/tomba-io/perl.git",' >> META_new.json
+	$(NOECHO) $(ECHO) '         "web" : "https://github.com/tomba-io/perl"' >> META_new.json
+	$(NOECHO) $(ECHO) '      }' >> META_new.json
+	$(NOECHO) $(ECHO) '   },' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "v1.1.0",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 4.06"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
@@ -787,7 +909,7 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
 FULLPERL      = "/usr/bin/perl"
-MAP_PERLINC   = "-Iblib/arch" "-Iblib/lib" "-I/usr/lib/x86_64-linux-gnu/perl/5.26" "-I/usr/share/perl/5.26"
+MAP_PERLINC   = "-Iblib/arch" "-Iblib/lib" "-I/usr/lib/x86_64-linux-gnu/perl/5.34" "-I/usr/share/perl/5.34"
 
 $(MAP_TARGET) :: $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
@@ -804,7 +926,7 @@ $(MAKE_APERL_FILE) : static $(FIRST_MAKEFILE) pm_to_blib
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
-TEST_FILES = 
+TEST_FILES = t/*.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
@@ -819,26 +941,38 @@ test_ : test_dynamic
 
 subdirs-test_dynamic :: dynamic pure_all
 
-testdb_dynamic test_dynamic :: subdirs-test_dynamic
-	$(NOECHO) $(ECHO) 'No tests defined for $(NAME) extension.'
+test_dynamic :: subdirs-test_dynamic
+	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
+
+testdb_dynamic :: dynamic pure_all
+	PERL_DL_NONLAZY=1 $(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
 
 subdirs-test_static :: static pure_all
 
-testdb_static test_static :: subdirs-test_static
-	$(NOECHO) $(ECHO) 'No tests defined for $(NAME) extension.'
+test_static :: subdirs-test_static
+	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
+
+testdb_static :: static pure_all
+	PERL_DL_NONLAZY=1 $(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
 
 
 
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="Tomba-Finder" VERSION="1.0">' > Tomba-Finder.ppd
-	$(NOECHO) $(ECHO) '    <ABSTRACT>Perl extension for Tomba Email Finder tomba.io</ABSTRACT>' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="Tomba-Finder" VERSION="1.1.0">' > Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '    <ABSTRACT>Perl client library for the Tomba.io Email Finder API</ABSTRACT>' >> Tomba-Finder.ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>Mohamed Ben rebia &lt;b.mohamed@tomba.io&gt;</AUTHOR>' >> Tomba-Finder.ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '        <PERLCORE VERSION="5,026001,0,0" />' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="HTTP::Headers" />' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="HTTP::Request" />' >> Tomba-Finder.ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="JSON::" />' >> Tomba-Finder.ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="LWP::UserAgent" />' >> Tomba-Finder.ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.26" />' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="URI::" />' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="URI::Escape" />' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="parent::" />' >> Tomba-Finder.ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.34" />' >> Tomba-Finder.ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> Tomba-Finder.ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> Tomba-Finder.ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> Tomba-Finder.ppd
@@ -848,8 +982,29 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
+	  'lib/Tomba/Account.pm' 'blib/lib/Tomba/Account.pm' \
+	  'lib/Tomba/Bulk.pm' 'blib/lib/Tomba/Bulk.pm' \
+	  'lib/Tomba/Client.pm' 'blib/lib/Tomba/Client.pm' \
+	  'lib/Tomba/Count.pm' 'blib/lib/Tomba/Count.pm' \
+	  'lib/Tomba/Domain.pm' 'blib/lib/Tomba/Domain.pm' \
+	  'lib/Tomba/Enrichment.pm' 'blib/lib/Tomba/Enrichment.pm' \
 	  'lib/Tomba/Finder.pm' 'blib/lib/Tomba/Finder.pm' \
-	  'test.pm' '$(INST_LIB)/Tomba/test.pm' 
+	  'lib/Tomba/Flag.pm' 'blib/lib/Tomba/Flag.pm' \
+	  'lib/Tomba/Format.pm' 'blib/lib/Tomba/Format.pm' \
+	  'lib/Tomba/Keys.pm' 'blib/lib/Tomba/Keys.pm' \
+	  'lib/Tomba/Leads.pm' 'blib/lib/Tomba/Leads.pm' \
+	  'lib/Tomba/LeadsAttributes.pm' 'blib/lib/Tomba/LeadsAttributes.pm' \
+	  'lib/Tomba/LeadsList.pm' 'blib/lib/Tomba/LeadsList.pm' \
+	  'lib/Tomba/Location.pm' 'blib/lib/Tomba/Location.pm' \
+	  'lib/Tomba/Logs.pm' 'blib/lib/Tomba/Logs.pm' \
+	  'lib/Tomba/Phone.pm' 'blib/lib/Tomba/Phone.pm' \
+	  'lib/Tomba/Reveal.pm' 'blib/lib/Tomba/Reveal.pm' \
+	  'lib/Tomba/Similar.pm' 'blib/lib/Tomba/Similar.pm' \
+	  'lib/Tomba/Sources.pm' 'blib/lib/Tomba/Sources.pm' \
+	  'lib/Tomba/Status.pm' 'blib/lib/Tomba/Status.pm' \
+	  'lib/Tomba/Technology.pm' 'blib/lib/Tomba/Technology.pm' \
+	  'lib/Tomba/Usage.pm' 'blib/lib/Tomba/Usage.pm' \
+	  'lib/Tomba/Verifier.pm' 'blib/lib/Tomba/Verifier.pm' 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 

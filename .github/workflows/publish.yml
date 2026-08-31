@@ -1,0 +1,42 @@
+name: Publish to CPAN
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish to CPAN
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.38'
+
+      - name: Install dependencies
+        run: |
+          cpanm --notest --installdeps .
+          cpanm --notest CPAN::Uploader
+
+      - name: Build and test
+        run: |
+          perl Makefile.PL
+          make
+          make test
+        env:
+          TOMBA_API_KEY: ${{ secrets.TOMBA_API_KEY }}
+          TOMBA_SECRET_KEY: ${{ secrets.TOMBA_SECRET_KEY }}
+
+      - name: Build distribution
+        run: make dist
+
+      - name: Upload to CPAN
+        run: cpan-upload -u "$CPAN_USERNAME" -p "$CPAN_PASSWORD" Tomba-Finder-*.tar.gz
+        env:
+          CPAN_USERNAME: ${{ secrets.CPAN_USERNAME }}
+          CPAN_PASSWORD: ${{ secrets.CPAN_PASSWORD }}

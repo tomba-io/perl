@@ -6,4 +6,5 @@
 /*.zip
 _build/
 Build
-Build.bat
+Build.bat.env
+.env

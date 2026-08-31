@@ -1,21 +1,39 @@
 use 5.026001;
 use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
+
 WriteMakefile(
     NAME              => 'Tomba::Finder',
-    VERSION_FROM      => 'lib/Tomba/Finder.pm', # finds $VERSION, requires EU::MM from perl >= 5.5
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
-    ABSTRACT_FROM     => 'lib/Tomba/Finder.pm', # retrieve abstract from module
+    VERSION_FROM      => 'lib/Tomba/Client.pm',
+    ABSTRACT_FROM     => 'lib/Tomba/Finder.pm',
     AUTHOR            => 'Mohamed Ben rebia <b.mohamed@tomba.io>',
-    LICENSE           => 'apache_2_0', # perl
-    #Value must be from legacy list of licenses here
-    #http://search.cpan.org/perldoc?Module%3A%3ABuild%3A%3AAPI
-    PREREQ_PM => {
-        'LWP::UserAgent'          => '0',
-        'JSON'                    => '0',
-
+    LICENSE           => 'apache_2_0',
+    MIN_PERL_VERSION  => '5.026001',
+    PREREQ_PM         => {
+        'LWP::UserAgent' => '0',
+        'JSON'           => '0',
+        'URI'            => '0',
+        'URI::Escape'    => '0',
+        'HTTP::Headers'  => '0',
+        'HTTP::Request'  => '0',
+        'parent'         => '0',
     },
-    dist              => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    TEST_REQUIRES     => {
+        'Test::More'     => '0.98',
+    },
+    META_MERGE        => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/tomba-io/perl.git',
+                web  => 'https://github.com/tomba-io/perl',
+            },
+            bugtracker => {
+                web => 'https://github.com/tomba-io/perl/issues',
+            },
+            homepage => 'https://tomba.io',
+        },
+    },
+    dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Tomba-Finder-*' },
 );
