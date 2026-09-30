@@ -199,6 +199,46 @@ sub call {
     return { data => $self->{body}, rate_limit => $rate_limit };
 }
 
+=head2 call_raw
+
+  my $result = $client->call_raw($path, $params);
+
+Makes a GET request to the Tomba API and returns the raw response body
+as a string without JSON decoding. Useful for endpoints that return
+non-JSON content such as CSV downloads.
+
+  Arg 1: Str $path - the path portion of the URL to request
+  Arg 2: HashRef $params - a hashref of query parameters to include in the URL
+  Returns: HashRef with raw response string in 'data' and rate_limit info
+
+=cut
+
+sub call_raw {
+    my ($self, $path, $params) = @_;
+
+    $self->{ua} = LWP::UserAgent->new;
+    $self->{ua}->default_headers(HTTP::Headers->new(
+        'X-Tomba-Key'    => $self->{apiKey},
+        'X-Tomba-Secret' => $self->{apiSecret},
+        'Accept'         => 'application/json',
+        'Content-Type'   => 'application/json',
+    ));
+    $self->{ua}->agent("Tomba-Finder/Perl/$VERSION");
+    $self->{ua}->timeout(120);
+
+    my $url = $self->{baseUrl} . $path;
+
+    if ($params && ref($params) eq 'HASH' && %$params) {
+        $url .= '?' . join('&', map { uri_escape($_) . '=' . uri_escape($params->{$_}) } keys %$params);
+    }
+
+    my $response = $self->{ua}->get($url);
+
+    my $rate_limit = _parse_rate_limit_headers($response);
+
+    return { data => $response->decoded_content, rate_limit => $rate_limit };
+}
+
 =head2 post
 
   my $result = $client->post($path, $body, $params);
